@@ -1,23 +1,27 @@
-
-
-#TODO 1. Create a dictionary in this format:
+# TODO 1. Create a dictionary in this format:
 # {"A": "Alfa", "B": "Bravo"}
-import  pandas
+import pandas
+
 nato_alphabet = pandas.read_csv("nato_phonetic_alphabet.csv")
-for (index, row) in nato_alphabet.iterrows():
-    nato_alphabet_dic = {row.letter:row.code for (index, row) in nato_alphabet.iterrows()}
-print(nato_alphabet_dic)
 
 
-#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
-user_input = input("Enter a word: ").upper()
-new_user_input_list = [char for char in user_input]
-new_alphabet = [nato_alphabet_dic[val] for val in new_user_input_list]
-print(new_alphabet)
+# for (index, row) in nato_alphabet.iterrows():
+
+def generate_word():
+    nato_alphabet_dic = {row.letter: row.code for (index , row) in nato_alphabet.iterrows()}
+    # print(nato_alphabet_dic)
+    user_input = input("Enter a word: ").upper()
+    try:
+        new_user_input_list = [char for char in user_input]
+        new_alphabet = [nato_alphabet_dic[val] for val in new_user_input_list]
+    except KeyError:
+        print("Sorry, only letters in the alphabet")
+        generate_word()
+    else:
+        print(new_alphabet)
 
 
-
-
+generate_word()
 
 # Dict comprehension
 
@@ -26,7 +30,7 @@ print(new_alphabet)
 #     "score": [56, 76, 98]
 # }
 
-#Looping through dictionaries:
+# Looping through dictionaries:
 # for (key, value) in student_dict.items():
 #     #Access key and value
 #     pass
